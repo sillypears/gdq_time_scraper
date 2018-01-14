@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import requests
 
 URL = "https://gamesdonequick.com/schedule"
-FILE = "agdq-2017-schedule-scrape.txt"
+FILE = "agdq-2018-schedule-scrape.txt"
 
 def start_analysis(data_file):
     with open(data_file, "r") as f:
