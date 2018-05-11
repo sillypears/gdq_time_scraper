@@ -2,7 +2,7 @@
  <thead>
   <tr class="day-split">
    <td>
-    Time &amp; Length
+    Time &amp; Length 
    </td>
    <td>
     Run
