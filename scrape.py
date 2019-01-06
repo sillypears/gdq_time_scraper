@@ -8,7 +8,17 @@ import pytz
 
 URL = "https://gamesdonequick.com/schedule"
 FILE = "agdq-2019-schedule-scrape.txt"
-GAMES = ("Overload", "Crypt of the NecroDancer: AMPLIFIED")
+GAMES = (
+    "Overload",
+    "Crypt of the NecroDancer: AMPLIFIED",
+    "Shadow of the Colossus (2018)",
+    "Castlevania: Symphony of the Night",
+    "Dead Cells",
+    "Celeste",
+    "TASBot plays mari0 (SMB1 + Portal gun)",
+    "I wanna kill the Kamilia 2",
+    "The Legend of Zelda: A Link to the Past"
+    )
 tz = pytz.timezone("America/New_York")
 
 def start_analysis(soup):
