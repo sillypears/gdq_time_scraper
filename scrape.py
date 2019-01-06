@@ -16,7 +16,7 @@ def start_analysis(soup):
 
     #print soup.prettify("utf-8")
     tds = soup.find_all("td", {"class": "start-time text-right"})
-    
+    print("")
     for td in tds:
         try: 
             
@@ -50,9 +50,9 @@ def main():
         r = requests.get(URL)
         data = r.text
         soup = BeautifulSoup(data, "html.parser")
-
-    start_analysis(soup)
-    os.system("pause")
+    while(True):
+        start_analysis(soup)
+        os.system("pause")
 
 if __name__ == "__main__":
     sys.exit(main())
