@@ -17,7 +17,7 @@ tz = pytz.timezone("America/New_York")
 
 def start_analysis(soup, games, times):
     tds = soup.find_all("td", {"class": "start-time text-right"})
-    
+    now = pytz.utc.localize(datetime.utcnow())
     for td in tds:
         try: 
             start_time = pytz.utc.localize(datetime.fromisoformat(td.getText().strip()[:-1:]))
@@ -38,14 +38,23 @@ def start_analysis(soup, games, times):
             pass
         minutes_off_from_original = 0
         b_or_a = "later"
-        if game_name in times.keys():
+        if game_name in times.keys() and game_name in games:
             og_time = datetime.fromisoformat(times[game_name])
-            minutes_off_from_original = int((og_time - start_time).seconds % 3600/60)
-            #print("{} - {} = {}".format(og_time, start_time,  int((og_time - start_time).seconds % 3600/60)))
+            og_epoch = int(og_time.timestamp())
+            time_epoch = int(start_time.timestamp())
+            minutes_off_from_original = int((time_epoch - og_epoch)/60)
+            #print("{} - {} = {}".format(og_time, start_time,  (start_time - og_time).seconds % 3600/60))
         if minutes_off_from_original < 0:
             b_or_a = "faster"
-        if setup_time and game_name in games:
-            print("{} - {} by {} _ {} min {}".format(start_time.astimezone(tz).strftime("%a @ %I:%M %p"), game_name, runner_name, minutes_off_from_original, b_or_a))
+        if setup_time and game_name in games and start_time > now:
+            print("{} - {} by {} _ {} min {}".format(
+                start_time.astimezone(tz).strftime("%a @ %I:%M %p"), 
+                game_name, 
+                runner_name, 
+                abs(minutes_off_from_original), 
+                b_or_a
+            ))
+            
 
     print("")
     return 0
